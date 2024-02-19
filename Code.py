@@ -1,7 +1,6 @@
 import heapq
 from collections import Counter, defaultdict
-import math
-
+from math import *
 # Функция для проведения статического анализа текста и записи результатов в файл
 def analyze_text(file_name):
     with open(file_name, 'r', encoding='utf-8') as file:
@@ -107,23 +106,18 @@ with open('Text_5_code.txt', 'w', encoding='utf-8') as encoded_file_5_bit:
 bit_count_huffman = len(encoded_text)
 bit_count_5_bit = len(encoded_text_5_bit)
 
-print(f"Количество бит в файле Text_Huffman.txt: {bit_count_huffman}")
-print(f"Количество бит в файле Text_5_code.txt: {bit_count_5_bit}")
-print('\n')
-
 # Функция для вычисления количества информации по формуле Шеннона
 def shannon_entropy(char_freq):
     entropy = 0
     total_chars = sum(char_freq.values())
     for freq in char_freq.values():
         probability = freq / total_chars
-        entropy -= probability * math.log2(probability)
+        entropy -= probability * log2(probability)
     return entropy
 
 # Сравниваем с количеством информации по формуле Шеннона
-shannon_bits = shannon_entropy(char_freq) * 18845
-
-print(f"Количество бит по формуле Шеннона: {shannon_bits} \n")
+shannon_bits = shannon_entropy(char_freq) * 15487
+print(f"Количество бит по формуле Шеннона: {shannon_bits}")
 def lzw_encode(text):
     dictionary = {chr(i): i for i in range(256)}
     result = []
@@ -150,7 +144,7 @@ with open('lab4.txt', 'r', encoding='utf-8') as file:
 encoded_text_lzw = lzw_encode(text)
 
 # Запись закодированного текста в файл Text_LZW.txt
-with open('lab4.txt', 'w', encoding='utf-8') as encoded_file_lzw:
+with open('Text_LZW.txt', 'w', encoding='utf-8') as encoded_file_lzw:
     encoded_file_lzw.write(' '.join(map(str, encoded_text_lzw)))
 
 # Вычисление количества бит закодированного текста
